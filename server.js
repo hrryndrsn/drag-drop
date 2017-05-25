@@ -6,7 +6,7 @@ var path = require('path');
 var serveIndex = require('serve-index');
 const hbs = require('hbs');
 
-var upload = multer({ dest: 'uploads/'});
+var upload = multer({ dest: '/public/uploads/'});
 var app = express();
 
 app.set('view engine', 'hbs');
@@ -54,7 +54,7 @@ app.post('/', upload.any(), function (req, res, next) {
     //Move the file
     fs.rename(tempPath, uploadPath, (err) => {
         if (err) {
-            console.log(err);
+            console.log('POST ERROR || ' + err);
         }
     });
     
