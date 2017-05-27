@@ -18,7 +18,7 @@ app.use(express.static(__dirname + '/public'));
 //logger middleware
 app.use((req, res, next) => {
     var now = new Date().toString();
-    console.log(` TIME: ${now} ~ METHOD | ${req.method}, URL | ${req.url}`);
+    console.log(` TIME: ${now} ~ METHOD: ${req.method}, URL: ${req.url}`);
     next();    
 });
 
@@ -48,6 +48,32 @@ app.post('/uploads/', upload.any(), function (req, res, next) {
     
 });
 
+// /uploads/2D/  route
+app.post('/uploads/2D/', upload.any(), function (req, res, next) {
+    
+    //set the file
+    console.log(req.files, 'files');
+    console.log(req.files[0].originalname, 'file name')
+    var fileName = req.files[0].originalname;
+    var fileSize = req.files[0].size;
+    var tempPath = req.files[0].path;
+    var uploadPath = __dirname + '/public/uploads/2D/' + fileName;
+
+    //saving the file
+    console.log(`SERVER LOG ~ file: ${fileName} size: ${fileSize} `);
+    console.log(`SERVER LOG ~ uploading file to : ${uploadPath}`);
+    
+    //Move the file
+    fs.rename(tempPath, uploadPath, (err) => {
+        if (err) {
+            console.log('POST ERROR || ' + err);
+        }
+    });
+    
+    return res.status(200).send('success');
+    
+});
+
 // /uploads/3D/  route
 app.post('/uploads/3D/', upload.any(), function (req, res, next) {
     
@@ -58,6 +84,32 @@ app.post('/uploads/3D/', upload.any(), function (req, res, next) {
     var fileSize = req.files[0].size;
     var tempPath = req.files[0].path;
     var uploadPath = __dirname + '/public/uploads/3D/' + fileName;
+
+    //saving the file
+    console.log(`SERVER LOG ~ file: ${fileName} size: ${fileSize} `);
+    console.log(`SERVER LOG ~ uploading file to : ${uploadPath}`);
+    
+    //Move the file
+    fs.rename(tempPath, uploadPath, (err) => {
+        if (err) {
+            console.log('POST ERROR || ' + err);
+        }
+    });
+    
+    return res.status(200).send('success');
+    
+});
+
+// /uploads/3D/  route
+app.post('/uploads/Output/', upload.any(), function (req, res, next) {
+    
+    //set the file
+    console.log(req.files, 'files');
+    console.log(req.files[0].originalname, 'file name')
+    var fileName = req.files[0].originalname;
+    var fileSize = req.files[0].size;
+    var tempPath = req.files[0].path;
+    var uploadPath = __dirname + '/public/uploads/Output/' + fileName;
 
     //saving the file
     console.log(`SERVER LOG ~ file: ${fileName} size: ${fileSize} `);
