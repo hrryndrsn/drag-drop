@@ -51,6 +51,7 @@
         return el;
       }
 
+      //---------------------------------------------------------------------------
       //search functionality 
       function search() {
         var str = $('search').value.toLowerCase();
@@ -65,31 +66,44 @@
           }
         });
       }
-      
+
+      var pathname;
+
+      //---------------------------------------------------------------------------
       //activate the search function on key up
       $(window).on('content loaded', function(){
         $('search').on('keyup', search);        
       });
 
-  
-      Dropzone.options.myDropzone = {
-        url: '/', // this seems to work for the url - matches the route in server
-        // reload page after file que finishes
-        init: function() {
-          this.on("queuecomplete", function(file) {
-              setTimeout(function() {location.reload();}, 1000);
-              //alert('page reloaded');
-          });
-        }
-      };
+      //---------------------------------------------------------------------------
+      //get page url
+      $(window).on('content loaded', function() {
+        pathname = "" + window.location.pathname;
+        console.log('pathname = ' + pathname);
+      });
+
+      //---------------------------------------------------------------------------
+      //dropzone settings
+      
 
     </script>
   </head>
   <body class="directory">
     <input id="search" type="text" placeholder="Search" autocomplete="off" />
 
-    <div id="myDropzone" class="dropzone" style="margin-bottom: 100px;">
-        
+    <div style="margin-bottom: 100px;">
+        <form id="my-dropzone" action="/some-url" class="dropzone"></form>
+          <script>
+          var pathName = window.location.pathname;
+          Dropzone.options.myDropzone = {
+            init: function() {
+              this.on("processing", function(file) {
+                console.log(pathName);
+                this.options.url = "" + pathName;
+              });
+            },
+          };
+          </script>
     </div>
 
     <div id="wrapper">
@@ -98,8 +112,13 @@
     </div>
 
     <script>
-      // Dropzone class:
-     
+
+          
+          // reload page after file que finishes
+                  
+   
+          
+
 
     </script>
   </body>
