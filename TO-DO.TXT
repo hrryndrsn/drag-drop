@@ -1,0 +1,4 @@
+
+
+// create a template 'helper' to inject the absolute path to dropzone JS and CSS 
+// HSB helper
