@@ -11,6 +11,16 @@ var app = express();
 
 app.set('view engine', 'hbs');
 
+hbs.registerHelper('getDropzoneJS', () => {
+    var path = '/js/dropzone.js'
+    return path
+});
+
+hbs.registerHelper('getDropzoneCSS', () => {
+    var path = '/css/dropzone.css'
+    return path
+});
+
 // setup static file server for public dir
 app.use(express.static(__dirname + '/public'));
 
