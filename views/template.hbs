@@ -101,7 +101,13 @@
                 console.log(pathName);
                 this.options.url = "" + pathName;
               });
-            },
+
+              this.on("queuecomplete", function(file) {
+
+                setTimeout(function() {location.reload();}, 1000);
+               
+            });
+            }
           };
           </script>
     </div>
