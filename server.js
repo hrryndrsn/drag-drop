@@ -3,6 +3,8 @@ const multer = require('multer');
 const fs = require('fs');
 var path = require('path');
 
+const port = process.env.PORT || 3000; //heroku port, if that doesnt exist then 3000
+
 var serveIndex = require('serve-index');
 const hbs = require('hbs');
 
@@ -170,7 +172,7 @@ app.post('/', upload.any(), function (req, res, next) {
 
 
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000') // second argument of app.listen
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}`) // second argument of app.listen
 });
 

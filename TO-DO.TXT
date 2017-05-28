@@ -1,4 +1,8 @@
 
 
-// create a template 'helper' to inject the absolute path to dropzone JS and CSS 
-// HSB helper
+//add POST routes for all sub directories 
+//turn on page reload
+//add a confirm message when the file upload completes but before reload
+//add date * time to uploaded file name
+//fix some styles maybe
+//look at depolying to AWS
