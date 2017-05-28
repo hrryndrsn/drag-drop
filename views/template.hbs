@@ -6,7 +6,7 @@
     <title>drag-drop {directory}</title>
     <style>{style}</style>
     <script src="https://cdn.rawgit.com/hrryndrsn/drag-drop/master/dropzone.js" type="text/javascript"></script> 
-    <link href="https://cdn.rawgit.com/hrryndrsn/drag-drop/master/dropzone.css" type="text/css" rel="stylesheet"/>
+    <link href="dropzone_edit.css" type="text/css" rel="stylesheet"/> 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
@@ -82,50 +82,38 @@
         console.log('pathname = ' + pathname);
       });
 
-      //---------------------------------------------------------------------------
-      //dropzone settings
-      
 
     </script>
   </head>
   <body class="directory">
     <input id="search" type="text" placeholder="Search" autocomplete="off" />
 
-    <div style="margin-bottom: 100px;">
-        <form id="my-dropzone" action="/some-url" class="dropzone"></form>
-          <script>
-          var pathName = window.location.pathname;
-          Dropzone.options.myDropzone = {
-            init: function() {
-              this.on("processing", function(file) {
-                console.log(pathName);
-                this.options.url = "" + pathName;
-              });
-
-              this.on("queuecomplete", function(file) {
-
-                setTimeout(function() {location.reload();}, 1000);
-               
-            });
-            }
-          };
-          </script>
-    </div>
-
     <div id="wrapper">
+
+      <div style="margin-bottom: 100px;">
+          <form id="my-dropzone" action="/some-url" class="dropzone"></form>
+            <script>
+            var pathName = window.location.pathname;
+            Dropzone.options.myDropzone = {
+              init: function() {
+                this.on("processing", function(file) {
+                  console.log(pathName);
+                  this.options.url = "" + pathName;
+                });
+
+                this.on("queuecomplete", function(file) {
+
+                  setTimeout(function() {location.reload();}, 1000);
+                
+              });
+              }
+            };
+            
+            </script>
+      </div>
+
       <h1><a href="/">~</a>{linked-path}</h1>
       {files}
     </div>
-
-    <script>
-
-          
-          // reload page after file que finishes
-                  
-   
-          
-
-
-    </script>
   </body>
 </html>
